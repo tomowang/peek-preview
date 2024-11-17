@@ -40,20 +40,34 @@ export default defineContentScript({
         "click",
         async (event) => {
           if (!event.shiftKey) return;
-          if (!(event.target instanceof HTMLAnchorElement)) return;
 
-          if (event.target.href.startsWith("http")) {
-            // only open http links
-            event.preventDefault();
-            event.stopPropagation();
-            await browser.runtime.sendMessage<OpenMessage>({
-              action: MessageActions.OPEN,
-              url: event.target.href,
-            });
-          }
+          await openPopup(event);
+        },
+        { capture: true }
+      );
+
+      ctx.addEventListener(
+        document,
+        "dragend",
+        async (event) => {
+          await openPopup(event);
         },
         { capture: true }
       );
     }
   },
 });
+
+async function openPopup(event: MouseEvent) {
+  if (!(event.target instanceof HTMLAnchorElement)) return;
+
+  if (event.target.href.startsWith("http")) {
+    // only open http links
+    event.preventDefault();
+    event.stopPropagation();
+    await browser.runtime.sendMessage<OpenMessage>({
+      action: MessageActions.OPEN,
+      url: event.target.href,
+    });
+  }
+}
