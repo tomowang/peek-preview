@@ -26,6 +26,13 @@ export default defineContentScript({
           }
         }
       );
+
+      // blur to close
+      ctx.addEventListener(window, "blur", async function close() {
+        await browser.runtime.sendMessage<CloseMessage>({
+          action: MessageActions.CLOSE,
+        });
+      });
     } else {
       // open links with shift key
       ctx.addEventListener(

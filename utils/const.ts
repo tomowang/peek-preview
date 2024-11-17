@@ -15,4 +15,4 @@ export type CloseMessage = Message & {
   // windowId: number;
 };
 
-export const EXT_PARAM_KEY = "wxt-peek-preview";
+export const EXT_PARAM_KEY = "_peek_preview";
