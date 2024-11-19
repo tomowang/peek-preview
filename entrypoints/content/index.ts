@@ -4,13 +4,17 @@ import {
   OpenMessage,
   CloseMessage,
   MessageActions,
+  OPEN_MODE_STORAGE_KEY,
+  OpenMode,
 } from "@/utils/const";
 
 export default defineContentScript({
   matches: ["*://*/*"],
-  main(ctx: ContentScriptContext) {
+  async main(ctx: ContentScriptContext) {
     const url = new URL(location.href);
     const params = new URLSearchParams(url.search);
+
+    const openMode = await storage.getItem<number>(OPEN_MODE_STORAGE_KEY);
 
     // peek preview window
     if (params.has(EXT_PARAM_KEY)) {
@@ -35,25 +39,29 @@ export default defineContentScript({
       });
     } else {
       // open links with shift key
-      ctx.addEventListener(
-        document,
-        "click",
-        async (event) => {
-          if (!event.shiftKey) return;
+      if (openMode && openMode & OpenMode.SHIFT_CLICK) {
+        ctx.addEventListener(
+          document,
+          "click",
+          async (event) => {
+            if (!event.shiftKey) return;
 
-          await openPopup(event);
-        },
-        { capture: true }
-      );
-
-      ctx.addEventListener(
-        document,
-        "dragend",
-        async (event) => {
-          await openPopup(event);
-        },
-        { capture: true }
-      );
+            await openPopup(event);
+          },
+          { capture: true }
+        );
+      }
+      // open links with drag
+      if (openMode && openMode & OpenMode.DRAG_LINK) {
+        ctx.addEventListener(
+          document,
+          "dragend",
+          async (event) => {
+            await openPopup(event);
+          },
+          { capture: true }
+        );
+      }
     }
   },
 });
