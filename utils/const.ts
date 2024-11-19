@@ -24,3 +24,11 @@ export enum OpenMode {
   DRAG_LINK = 0b10,
   BOTH = SHIFT_CLICK | DRAG_LINK,
 }
+
+export const CLOSE_MODE_STORAGE_KEY = "local:closeMode";
+
+export enum CloseMode {
+  ESCAPE = 0b1,
+  BLUR = 0b10,
+  BOTH = ESCAPE | BLUR,
+}

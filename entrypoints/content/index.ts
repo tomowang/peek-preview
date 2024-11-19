@@ -5,7 +5,9 @@ import {
   CloseMessage,
   MessageActions,
   OPEN_MODE_STORAGE_KEY,
+  CLOSE_MODE_STORAGE_KEY,
   OpenMode,
+  CloseMode,
 } from "@/utils/const";
 
 export default defineContentScript({
@@ -15,28 +17,33 @@ export default defineContentScript({
     const params = new URLSearchParams(url.search);
 
     const openMode = await storage.getItem<number>(OPEN_MODE_STORAGE_KEY);
+    const closeMode = await storage.getItem<number>(CLOSE_MODE_STORAGE_KEY);
 
     // peek preview window
     if (params.has(EXT_PARAM_KEY)) {
       // escape to close
-      ctx.addEventListener(
-        window,
-        "keydown",
-        async function close(event: KeyboardEvent) {
-          if (event.key === "Escape") {
-            await browser.runtime.sendMessage<CloseMessage>({
-              action: MessageActions.CLOSE,
-            });
+      if (closeMode && closeMode & CloseMode.ESCAPE) {
+        ctx.addEventListener(
+          window,
+          "keydown",
+          async function close(event: KeyboardEvent) {
+            if (event.key === "Escape") {
+              await browser.runtime.sendMessage<CloseMessage>({
+                action: MessageActions.CLOSE,
+              });
+            }
           }
-        }
-      );
+        );
+      }
 
       // blur to close
-      ctx.addEventListener(window, "blur", async function close() {
-        await browser.runtime.sendMessage<CloseMessage>({
-          action: MessageActions.CLOSE,
+      if (closeMode && closeMode & CloseMode.BLUR) {
+        ctx.addEventListener(window, "blur", async function close() {
+          await browser.runtime.sendMessage<CloseMessage>({
+            action: MessageActions.CLOSE,
+          });
         });
-      });
+      }
     } else {
       // open links with shift key
       if (openMode && openMode & OpenMode.SHIFT_CLICK) {
