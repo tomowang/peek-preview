@@ -9,6 +9,8 @@ function App() {
   const [openMode, setOpenMode] = useState(OpenMode.BOTH);
   const [closeMode, setCloseMode] = useState(CloseMode.BOTH);
 
+  const t = browser.i18n.getMessage;
+
   useEffect(() => {
     storage.getItem<number>(OPEN_MODE_STORAGE_KEY).then((mode) => {
       if (mode) setOpenMode(mode);
@@ -33,8 +35,8 @@ function App() {
   return (
     <div className="w-64">
       <nav className="w-full flex flex-row items-center gap-1 p-2 border-b-2 border-orange-500">
-        <img src={logo} alt="Peek Preview" className="w-6 h-6" />
-        <h1 className="text-base">Peek Preview</h1>
+        <img src={logo} alt={t("popupTitle")} className="w-6 h-6" />
+        <h1 className="text-base">{t("popupTitle")}</h1>
         <div className="flex-1"></div>
         <a href="https://github.com/tomowang/peek-preview" target="_blank">
           <img src={GitHubLogo} alt="GitHub" className="w-6 h-6" />
@@ -42,7 +44,7 @@ function App() {
       </nav>
       <div className="p-2 flex flex-col space-y-3">
         <div className="space-y-3">
-          <Label>Peek Preview Method</Label>
+          <Label>{t("openModeTitle")}</Label>
           <RadioGroup
             value={openMode.toString()}
             onValueChange={handleChangeOpenMode}
@@ -52,23 +54,25 @@ function App() {
                 value={OpenMode.SHIFT_CLICK.toString()}
                 id="open-shift-click"
               />
-              <Label htmlFor="open-shift-click">Shift⇧ Click</Label>
+              <Label htmlFor="open-shift-click">
+                {t("openModeShiftClick")}
+              </Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem
                 value={OpenMode.DRAG_LINK.toString()}
                 id="open-drag-link"
               />
-              <Label htmlFor="open-drag-link">Drag Link</Label>
+              <Label htmlFor="open-drag-link">{t("openModeDragLink")}</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value={OpenMode.BOTH.toString()} id="open-both" />
-              <Label htmlFor="open-both">Both</Label>
+              <Label htmlFor="open-both">{t("openModeBoth")}</Label>
             </div>
           </RadioGroup>
         </div>
         <div className="space-y-3">
-          <Label>Close Popup Method</Label>
+          <Label>{t("closeModeTitle")}</Label>
           <RadioGroup
             value={closeMode.toString()}
             onValueChange={handleChangeCloseMode}
@@ -78,21 +82,21 @@ function App() {
                 value={CloseMode.ESCAPE.toString()}
                 id="close-escape"
               />
-              <Label htmlFor="close-escape">Esc</Label>
+              <Label htmlFor="close-escape">{t("closeModeEsc")}</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem
                 value={CloseMode.BLUR.toString()}
                 id="close-blur"
               />
-              <Label htmlFor="close-blur">Blur</Label>
+              <Label htmlFor="close-blur">{t("closeModeBlur")}</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem
                 value={CloseMode.BOTH.toString()}
                 id="close-both"
               />
-              <Label htmlFor="close-both">Both</Label>
+              <Label htmlFor="close-both">{t("closeModeBoth")}</Label>
             </div>
           </RadioGroup>
         </div>

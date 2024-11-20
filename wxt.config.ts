@@ -4,6 +4,7 @@ import { defineConfig } from "wxt";
 export default defineConfig({
   manifest: {
     name: "Peek Preview",
+    default_locale: "en",
     permissions: ["storage"],
   },
   extensionApi: "chrome",

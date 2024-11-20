@@ -1,0 +1,29 @@
+{
+  "popupTitle": {
+    "message": "Peek Preview"
+  },
+  "openModeTitle": {
+    "message": "Peek Preview Method"
+  },
+  "openModeShiftClick": {
+    "message": "Shift⇧ Click"
+  },
+  "openModeDragLink": {
+    "message": "Drag Link"
+  },
+  "openModeBoth": {
+    "message": "Both"
+  },
+  "closeModeTitle": {
+    "message": "Close Popup Method"
+  },
+  "closeModeEsc": {
+    "message": "Esc"
+  },
+  "closeModeBlur": {
+    "message": "Blur"
+  },
+  "closeModeBoth": {
+    "message": "Both"
+  }
+}
