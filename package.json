@@ -2,8 +2,22 @@
   "name": "peek-preview",
   "description": "Peek Preview - Arc like peek preview for your web browser",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": {
+    "name": "Xiaoliang Wang",
+    "email": "zero@tomo.dev",
+    "url": "https://tomo.dev"
+  },
+  "keywords": [
+    "browser",
+    "extension",
+    "peek preview"
+  ],
+  "bugs": {
+    "url": "https://github.com/tomowang/peek-preview/issues"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
