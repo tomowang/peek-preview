@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { OpenMode, OPEN_MODE_STORAGE_KEY, CloseMode } from "@/utils/const";
+import logo from "/icon/48.png";
+import GitHubLogo from "/github.svg";
 
 function App() {
   const [openMode, setOpenMode] = useState(OpenMode.BOTH);
@@ -29,8 +31,16 @@ function App() {
   }
 
   return (
-    <>
-      <div className="w-64 p-2 flex flex-col space-y-3">
+    <div className="w-64">
+      <nav className="w-full flex flex-row items-center gap-1 p-2 border-b-2 border-orange-500">
+        <img src={logo} alt="Peek Preview" className="w-6 h-6" />
+        <h1 className="text-base">Peek Preview</h1>
+        <div className="flex-1"></div>
+        <a href="https://github.com/tomowang/peek-preview" target="_blank">
+          <img src={GitHubLogo} alt="GitHub" className="w-6 h-6" />
+        </a>
+      </nav>
+      <div className="p-2 flex flex-col space-y-3">
         <div className="space-y-3">
           <Label>Peek Preview Method</Label>
           <RadioGroup
@@ -87,7 +97,7 @@ function App() {
           </RadioGroup>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
