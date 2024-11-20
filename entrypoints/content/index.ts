@@ -16,8 +16,12 @@ export default defineContentScript({
     const url = new URL(location.href);
     const params = new URLSearchParams(url.search);
 
-    const openMode = await storage.getItem<number>(OPEN_MODE_STORAGE_KEY);
-    const closeMode = await storage.getItem<number>(CLOSE_MODE_STORAGE_KEY);
+    const openMode = await storage.getItem<number>(OPEN_MODE_STORAGE_KEY, {
+      fallback: OpenMode.BOTH,
+    });
+    const closeMode = await storage.getItem<number>(CLOSE_MODE_STORAGE_KEY, {
+      fallback: CloseMode.BOTH,
+    });
 
     // peek preview window
     if (params.has(EXT_PARAM_KEY)) {
