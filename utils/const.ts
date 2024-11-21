@@ -32,3 +32,7 @@ export enum CloseMode {
   BLUR = 0b10,
   BOTH = ESCAPE | BLUR,
 }
+
+export const PERCENTAGE_STORAGE_KEY = "local:percentage";
+
+export const DEFAULT_PERCENTAGE = 90;

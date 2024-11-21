@@ -25,5 +25,8 @@
   },
   "closeModeBoth": {
     "message": "Both"
+  },
+  "popupSizeTitle": {
+    "message": "Popup Window Size"
   }
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Slider } from "@/components/ui/slider";
 import { OpenMode, OPEN_MODE_STORAGE_KEY, CloseMode } from "@/utils/const";
 import logo from "/icon/48.png";
 import GitHubLogo from "/github.svg";
@@ -8,6 +9,7 @@ import GitHubLogo from "/github.svg";
 function App() {
   const [openMode, setOpenMode] = useState(OpenMode.BOTH);
   const [closeMode, setCloseMode] = useState(CloseMode.BOTH);
+  const [percent, setPercent] = useState(DEFAULT_PERCENTAGE);
 
   const t = browser.i18n.getMessage;
 
@@ -17,6 +19,9 @@ function App() {
     });
     storage.getItem<number>(CLOSE_MODE_STORAGE_KEY).then((mode) => {
       if (mode) setCloseMode(mode);
+    });
+    storage.getItem<number>(PERCENTAGE_STORAGE_KEY).then((value) => {
+      if (value) setPercent(value);
     });
   });
 
@@ -99,6 +104,23 @@ function App() {
               <Label htmlFor="close-both">{t("closeModeBoth")}</Label>
             </div>
           </RadioGroup>
+        </div>
+
+        <div className="space-y-3">
+          <Label>{t("popupSizeTitle")}</Label>
+          <div className="flex flex-row items-center space-x-2">
+            <div>{percent}%</div>
+            <Slider
+              value={[percent]}
+              min={50}
+              max={100}
+              step={1}
+              onValueChange={async (value) => {
+                await storage.setItem<number>(PERCENTAGE_STORAGE_KEY, value[0]);
+                setPercent(value[0]);
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
