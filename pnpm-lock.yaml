@@ -55,19 +55,19 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1(vite@5.4.11(@types/node@22.9.0))(wxt@0.19.16(@types/node@22.9.0)(rollup@4.27.0))
       autoprefixer:
-        specifier: ^10.4.19
+        specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       postcss:
-        specifier: ^8.4.38
+        specifier: ^8.4.49
         version: 8.4.49
       tailwindcss:
-        specifier: ^3.4.4
+        specifier: ^3.4.15
         version: 3.4.15
       typescript:
-        specifier: ^5.4.5
+        specifier: ^5.6.3
         version: 5.6.3
       wxt:
-        specifier: ^0.19.13
+        specifier: ^0.19.16
         version: 0.19.16(@types/node@22.9.0)(rollup@4.27.0)
 
 packages:
@@ -770,8 +770,8 @@ packages:
     peerDependencies:
       wxt: '>=0.18.6'
 
-  '@wxt-dev/storage@1.0.0':
-    resolution: {integrity: sha512-Pr0nZUnA6ElAIq5yl+GdZfvhAI3/wXf7ZdwOHShI2VtDirfgo+tBFQZ123f86l5i81v7FfvrQi3WFSzojcRsJw==}
+  '@wxt-dev/storage@1.0.1':
+    resolution: {integrity: sha512-05fzQrr4z0WhdJ0rMQGmjCNTWAC7vrCtvlmu6ZWAKbxdc7k0+T9ui5qPIdF+PxcKPRavIY6ebowBy5KV9lRY0w==}
 
   acorn@8.14.0:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
@@ -3257,7 +3257,7 @@ snapshots:
       - supports-color
       - vite
 
-  '@wxt-dev/storage@1.0.0':
+  '@wxt-dev/storage@1.0.1':
     dependencies:
       async-mutex: 0.5.0
       dequal: 2.0.3
@@ -5130,7 +5130,7 @@ snapshots:
       '@webext-core/fake-browser': 1.3.1
       '@webext-core/isolated-element': 1.1.2
       '@webext-core/match-patterns': 1.0.3
-      '@wxt-dev/storage': 1.0.0
+      '@wxt-dev/storage': 1.0.1
       async-mutex: 0.5.0
       c12: 1.11.2(magicast@0.3.5)
       cac: 6.7.14
