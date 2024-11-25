@@ -49,7 +49,10 @@ function App() {
       </nav>
       <div className="p-2 flex flex-col space-y-3">
         <div className="space-y-3">
-          <Label>{t("openModeTitle")}</Label>
+          <div>
+            <Label>{t("openModeTitle")}</Label>
+            <p className="text-sm text-gray-500">{t("openModeDesc")}</p>
+          </div>
           <RadioGroup
             value={openMode.toString()}
             onValueChange={handleChangeOpenMode}

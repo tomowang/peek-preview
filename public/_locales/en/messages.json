@@ -5,6 +5,9 @@
   "openModeTitle": {
     "message": "Peek Preview Method"
   },
+  "openModeDesc": {
+    "message": "Changes take effect after refreshing the tab"
+  },
   "openModeShiftClick": {
     "message": "Shift⇧ Click"
   },
