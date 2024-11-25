@@ -15,21 +15,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
+
       - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'pnpm'
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: latest
-          run_install: true
+      - name: Install dependencies
+        run: pnpm install
 
-      - name: Build
-        run: pnpm build
-
-      - name: Package
+      - name: Package chrome and edge
         run: pnpm zip
+
+      - name: Package firefox
+        run: pnpm zip:firefox
 
       - name: Release
         uses: softprops/action-gh-release@v2

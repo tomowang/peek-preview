@@ -2,7 +2,7 @@
   "name": "peek-preview",
   "description": "Peek Preview - Arc like peek preview for your web browser",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "author": {
     "name": "Xiaoliang Wang",
