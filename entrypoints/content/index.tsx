@@ -34,11 +34,16 @@ export default defineContentScript({
       root: ReactDOM.Root;
       wrapper: HTMLDivElement;
     }> = null;
-    window.addEventListener("message", (event: MessageEvent) => {
+    window.addEventListener("message", async (event: MessageEvent) => {
+      log("message received: ", event.data);
       if (
-        event.data.action === MessageActions.CLOSE_IFRAME_POPUP &&
-        event.data.channel === MESSAGE_CHANNEL
+        event.data.channel === MESSAGE_CHANNEL &&
+        event.data.action === MessageActions.CLOSE_IFRAME_POPUP
       ) {
+        await browser.runtime.sendMessage<IFrameMessage>({
+          action: MessageActions.CLOSE_IFRAME_POPUP,
+          url: event.data.url,
+        });
         ui?.remove();
       }
     });
@@ -115,6 +120,11 @@ async function openPopup(
 
   if (windowMode === WindowMode.IFRAME) {
     // open in in-page iframe
+
+    await browser.runtime.sendMessage<IFrameMessage>({
+      action: MessageActions.OPEN_IFRAME_POPUP,
+      url: href,
+    });
 
     const percentage = await storage.getItem<number>(PERCENTAGE_STORAGE_KEY, {
       fallback: DEFAULT_PERCENTAGE,

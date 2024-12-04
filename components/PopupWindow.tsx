@@ -37,6 +37,7 @@ export default function PopupWindow({
       {
         action: MessageActions.CLOSE_IFRAME_POPUP,
         channel: MESSAGE_CHANNEL,
+        url,
       },
       "*"
     );
@@ -61,7 +62,7 @@ export default function PopupWindow({
           </div>
           <iframe
             src={url}
-            className="w-full h-full shadow-md rounded-md overflow-auto"
+            className="w-full h-full shadow-md rounded-md overflow-auto bg-white"
           />
         </div>
       </div>

@@ -1,6 +1,7 @@
 export enum MessageActions {
   OPEN,
   CLOSE,
+  OPEN_IFRAME_POPUP,
   CLOSE_IFRAME_POPUP,
 }
 
@@ -14,6 +15,11 @@ export type OpenMessage = Message & {
 
 export type CloseMessage = Message & {
   // windowId: number;
+};
+
+export type IFrameMessage = {
+  action: MessageActions.OPEN_IFRAME_POPUP | MessageActions.CLOSE_IFRAME_POPUP;
+  url: string;
 };
 
 export const MESSAGE_CHANNEL = "peek-preview";

@@ -5,6 +5,7 @@ import {
   MessageActions,
   PERCENTAGE_STORAGE_KEY,
   DEFAULT_PERCENTAGE,
+  IFrameMessage,
 } from "@/utils/const";
 import { log } from "@/utils/index";
 
@@ -36,4 +37,54 @@ export default defineBackground(() => {
       }
     }
   );
+
+  browser.runtime.onMessage.addListener(async (message: IFrameMessage) => {
+    log("background received message:", message);
+    const url = new URL(message.url);
+
+    const rules = await browser.declarativeNetRequest.getSessionRules();
+    if (message.action === MessageActions.OPEN_IFRAME_POPUP) {
+      await browser.declarativeNetRequest.updateSessionRules({
+        addRules: [
+          {
+            action: {
+              type: browser.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
+              responseHeaders: [
+                {
+                  header: "x-frame-options",
+                  operation:
+                    browser.declarativeNetRequest.HeaderOperation.REMOVE,
+                },
+                {
+                  header: "content-security-policy",
+                  operation:
+                    browser.declarativeNetRequest.HeaderOperation.REMOVE,
+                },
+              ],
+            },
+            priority: 1,
+            id: rules.length + 1,
+            condition: {
+              urlFilter: `*${url.host}${url.pathname}*`,
+              resourceTypes: [
+                browser.declarativeNetRequest.ResourceType.MAIN_FRAME,
+                browser.declarativeNetRequest.ResourceType.SUB_FRAME,
+              ],
+            },
+          },
+        ],
+      });
+    } else if (message.action === MessageActions.CLOSE_IFRAME_POPUP) {
+      let ids = rules
+        .filter((rule) =>
+          rule.condition.urlFilter?.includes(`${url.host}${url.pathname}`)
+        )
+        .map((rule) => rule.id);
+      if (ids.length > 0) {
+        await browser.declarativeNetRequest.updateSessionRules({
+          removeRuleIds: ids,
+        });
+      }
+    }
+  });
 });

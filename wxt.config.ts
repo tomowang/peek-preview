@@ -5,7 +5,7 @@ export default defineConfig({
   manifest: {
     name: "Peek Preview - Arc like link preview",
     default_locale: "en",
-    permissions: ["storage"],
+    permissions: ["storage", "declarativeNetRequest"],
   },
   extensionApi: "chrome",
   modules: ["@wxt-dev/module-react"],
