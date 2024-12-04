@@ -1,6 +1,7 @@
 export enum MessageActions {
   OPEN,
   CLOSE,
+  CLOSE_IFRAME_POPUP,
 }
 
 export type Message = {
@@ -15,7 +16,15 @@ export type CloseMessage = Message & {
   // windowId: number;
 };
 
+export const MESSAGE_CHANNEL = "peek-preview";
 export const EXT_PARAM_KEY = "_peek_preview";
+
+export const WINDOW_MODE_STORAGE_KEY = "local:windowMode";
+
+export enum WindowMode {
+  IFRAME = 0b1,
+  POPUP = 0b10,
+}
 
 export const OPEN_MODE_STORAGE_KEY = "local:openMode";
 

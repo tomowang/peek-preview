@@ -2,6 +2,15 @@
   "popupTitle": {
     "message": "Peek Preview"
   },
+  "windowModeTitle": {
+    "message": "Peek Preview"
+  },
+  "windowModeIframe": {
+    "message": "Open in current tab"
+  },
+  "windowModePopup": {
+    "message": "Open in popup window"
+  },
   "openModeTitle": {
     "message": "Peek Preview Method"
   },

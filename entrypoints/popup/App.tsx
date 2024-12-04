@@ -2,11 +2,17 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
-import { OpenMode, OPEN_MODE_STORAGE_KEY, CloseMode } from "@/utils/const";
+import {
+  OpenMode,
+  OPEN_MODE_STORAGE_KEY,
+  CloseMode,
+  WindowMode,
+} from "@/utils/const";
 import logo from "/icon/48.png";
 import GitHubLogo from "/github.svg";
 
 function App() {
+  const [windowMode, setWindowMode] = useState(WindowMode.IFRAME);
   const [openMode, setOpenMode] = useState(OpenMode.BOTH);
   const [closeMode, setCloseMode] = useState(CloseMode.BOTH);
   const [percent, setPercent] = useState(DEFAULT_PERCENTAGE);
@@ -14,6 +20,9 @@ function App() {
   const t = browser.i18n.getMessage;
 
   useEffect(() => {
+    storage.getItem<number>(WINDOW_MODE_STORAGE_KEY).then((mode) => {
+      if (mode) setWindowMode(mode);
+    });
     storage.getItem<number>(OPEN_MODE_STORAGE_KEY).then((mode) => {
       if (mode) setOpenMode(mode);
     });
@@ -24,6 +33,12 @@ function App() {
       if (value) setPercent(value);
     });
   });
+
+  async function handleChangeWindowMode(value: string) {
+    const v = parseInt(value);
+    await storage.setItem<number>(WINDOW_MODE_STORAGE_KEY, v);
+    setWindowMode(v);
+  }
 
   async function handleChangeOpenMode(value: string) {
     const v = parseInt(value);
@@ -48,6 +63,30 @@ function App() {
         </a>
       </nav>
       <div className="p-2 flex flex-col space-y-3">
+        <div className="space-y-3">
+          <div>
+            <Label>{t("windowModeTitle")}</Label>
+          </div>
+          <RadioGroup
+            value={windowMode.toString()}
+            onValueChange={handleChangeWindowMode}
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem
+                value={WindowMode.IFRAME.toString()}
+                id="window-iframe"
+              />
+              <Label htmlFor="window-iframe">{t("windowModeIframe")}</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem
+                value={WindowMode.POPUP.toString()}
+                id="window-popup"
+              />
+              <Label htmlFor="window-popup">{t("windowModePopup")}</Label>
+            </div>
+          </RadioGroup>
+        </div>
         <div className="space-y-3">
           <div>
             <Label>{t("openModeTitle")}</Label>
@@ -116,7 +155,7 @@ function App() {
             <Slider
               value={[percent]}
               min={50}
-              max={100}
+              max={95}
               step={1}
               onValueChange={async (value) => {
                 await storage.setItem<number>(PERCENTAGE_STORAGE_KEY, value[0]);
