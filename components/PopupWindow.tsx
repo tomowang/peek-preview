@@ -11,9 +11,8 @@ export default function PopupWindow({
   size: number;
   className?: string;
 }) {
-  let overflow = ""; // to store the previous overflow value
+  let overflow = useRef(document.body.style.overflow); // to store the previous overflow value
   useEffect(() => {
-    overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     function handleKeydown(event: KeyboardEvent) {
@@ -28,8 +27,8 @@ export default function PopupWindow({
     };
   });
   function closePopup() {
-    if (overflow) {
-      document.body.style.overflow = overflow;
+    if (overflow.current) {
+      document.body.style.overflow = overflow.current;
     } else {
       document.body.style.removeProperty("overflow");
     }
