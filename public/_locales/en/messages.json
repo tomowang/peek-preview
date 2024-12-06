@@ -12,22 +12,22 @@
     "message": "Open in popup window"
   },
   "openModeTitle": {
-    "message": "Peek Preview Method"
+    "message": "Peek Preview method"
   },
   "openModeDesc": {
     "message": "Changes take effect after refreshing the tab"
   },
   "openModeShiftClick": {
-    "message": "Shift⇧ Click"
+    "message": "Shift⇧ + click a link"
   },
   "openModeDragLink": {
-    "message": "Drag Link"
+    "message": "Drag a link"
   },
   "openModeBoth": {
     "message": "Both"
   },
   "closeModeTitle": {
-    "message": "Close Popup Method"
+    "message": "Preview window close method"
   },
   "closeModeEsc": {
     "message": "Esc"
@@ -39,6 +39,6 @@
     "message": "Both"
   },
   "popupSizeTitle": {
-    "message": "Popup Window Size"
+    "message": "Preview window size"
   }
 }

@@ -1,0 +1,44 @@
+{
+  "popupTitle": {
+    "message": "Peek Preview"
+  },
+  "windowModeTitle": {
+    "message": "Peek预览"
+  },
+  "windowModeIframe": {
+    "message": "当前标签页打开"
+  },
+  "windowModePopup": {
+    "message": "弹出式窗口打开"
+  },
+  "openModeTitle": {
+    "message": "Peek预览方式"
+  },
+  "openModeDesc": {
+    "message": "更改在刷新当前标签页后生效"
+  },
+  "openModeShiftClick": {
+    "message": "按住 Shift 键的同时点击链接"
+  },
+  "openModeDragLink": {
+    "message": "拖拽链接"
+  },
+  "openModeBoth": {
+    "message": "均可"
+  },
+  "closeModeTitle": {
+    "message": "关闭预览窗口方式"
+  },
+  "closeModeEsc": {
+    "message": "Esc"
+  },
+  "closeModeBlur": {
+    "message": "失焦"
+  },
+  "closeModeBoth": {
+    "message": "均可"
+  },
+  "popupSizeTitle": {
+    "message": "预览窗口大小"
+  }
+}
