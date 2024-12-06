@@ -14,8 +14,9 @@ Create by tomowang with ❤️ <https://tomo.dev>
 
 Features:
 
-1. Use shift⇧ click or drag link to open link in popup window instead of new tab
-2. Press Esc or just blur the popup window to close it
+1. Preview links in current tab or popup window
+2. Use shift⇧ + click link or drag link to open links for peek preview
+3. Press Esc or just blur the preview window to close it
 
 Open source on GitHub: <https://github.com/tomowang/peek-preview>
 
@@ -32,6 +33,8 @@ English
 ![icon 128](../public/icon/128.png)
 
 ## Promo Video
+
+https://youtu.be/s3XLsu8M1LY
 
 ## Screenshots
 
