@@ -40,5 +40,20 @@
   },
   "popupSizeTitle": {
     "message": "Preview window size"
+  },
+  "iframeActionClose": {
+    "message": "Close"
+  },
+  "iframeActionReload": {
+    "message": "Reload"
+  },
+  "iframeActionOpenInTab": {
+    "message": "Open in new tab"
+  },
+  "iframeActionCopyLink": {
+    "message": "Copy link"
+  },
+  "iframeActionCopied": {
+    "message": "Copied"
   }
 }

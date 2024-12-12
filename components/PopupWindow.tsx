@@ -1,6 +1,12 @@
 import { MESSAGE_CHANNEL, MessageActions } from "@/utils/const";
 import { cn } from "@/utils/index";
-import { CircleX } from "lucide-react";
+import {
+  Check,
+  CircleX,
+  Clipboard,
+  ExternalLink,
+  RefreshCw,
+} from "lucide-react";
 
 export default function PopupWindow({
   url,
@@ -11,7 +17,12 @@ export default function PopupWindow({
   size: number;
   className?: string;
 }) {
-  let overflow = useRef(document.body.style.overflow); // to store the previous overflow value
+  const t = browser.i18n.getMessage;
+  const overflow = useRef(document.body.style.overflow); // to store the previous overflow value
+  const iframe = useRef<HTMLIFrameElement>(null);
+
+  const [copid, setCopied] = useState<boolean>(false);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -53,13 +64,41 @@ export default function PopupWindow({
           className="relative"
           style={{ width: `${size}%`, height: `${size}%` }}
         >
-          <div className="flex justify-end px-2 absolute top-0 right-[-3em]">
-            <CircleX
-              className="w-8 h-8 cursor-pointer text-white"
-              onClick={closePopup}
-            />
+          <div className="flex flex-col gap-1 px-2 absolute top-0 right-[-3em]">
+            <div title={t("iframeActionClose")} onClick={closePopup}>
+              <CircleX className="w-8 h-8 cursor-pointer text-white" />
+            </div>
+            <div
+              title={t("iframeActionReload")}
+              onClick={() => iframe.current?.contentWindow?.location.reload()}
+            >
+              <RefreshCw className="w-8 h-8 cursor-pointer text-white" />
+            </div>
+            <div
+              title={t("iframeActionOpenInTab")}
+              onClick={() => window.open(url)}
+            >
+              <ExternalLink className="w-8 h-8 cursor-pointer text-white" />
+            </div>
+            {copid ? (
+              <div title={t("iframeActionCopied")}>
+                <Check className="w-8 h-8 cursor-pointer text-white" />
+              </div>
+            ) : (
+              <div
+                title={t("iframeActionCopyLink")}
+                onClick={() => {
+                  navigator.clipboard.writeText(url);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 2000);
+                }}
+              >
+                <Clipboard className="w-8 h-8 cursor-pointer text-white" />
+              </div>
+            )}
           </div>
           <iframe
+            ref={iframe}
             src={url}
             className="w-full h-full shadow-md rounded-md overflow-auto bg-white"
           />

@@ -40,5 +40,20 @@
   },
   "popupSizeTitle": {
     "message": "预览窗口大小"
+  },
+  "iframeActionClose": {
+    "message": "关闭"
+  },
+  "iframeActionReload": {
+    "message": "刷新"
+  },
+  "iframeActionOpenInTab": {
+    "message": "新标签页打开"
+  },
+  "iframeActionCopyLink": {
+    "message": "复制链接"
+  },
+  "iframeActionCopied": {
+    "message": "复制完成"
   }
 }
