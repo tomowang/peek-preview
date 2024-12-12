@@ -6,6 +6,10 @@
 ![MIT license](https://img.shields.io/github/license/tomowang/peek-preview)
 ![GitHub Repo stars](https://img.shields.io/github/stars/tomowang/peek-preview)
 
+[![Chrome Web Store](https://img.shields.io/badge/Google_chrome-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=white)](https://chromewebstore.google.com/detail/peek-preview-arc-like-lin/jlllnhfjmihoiagiaallhmlcgdohdocb)
+[![Microsoft Edge Addons](https://img.shields.io/badge/Microsoft_Edge-0078D7?style=for-the-badge&logo=Microsoft-edge&logoColor=white)](https://microsoftedge.microsoft.com/addons/detail/peek-preview-arc-like-l/lmgfgcpcpmplbhgfbopiidfkamfckpgp)
+[![Firefox Add-ons](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox&logoColor=white)](https://addons.mozilla.org/addon/peek-preview-arc-like-preview/)
+
 Peek Preview is a browser extension that allows you to preview the contents of a
 webpage before you open it in a new tab.
 
