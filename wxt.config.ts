@@ -1,4 +1,5 @@
 import { defineConfig } from "wxt";
+import removeConsole from 'vite-plugin-remove-console'
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
@@ -9,4 +10,10 @@ export default defineConfig({
   },
   extensionApi: "chrome",
   modules: ["@wxt-dev/module-react"],
+  vite: (configEnv) => ({
+    plugins:
+      configEnv.mode === 'production'
+        ? [removeConsole({ includes: ['log'] })]
+        : [],
+  }),
 });
