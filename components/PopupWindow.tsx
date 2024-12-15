@@ -20,6 +20,7 @@ export default function PopupWindow({
   const t = browser.i18n.getMessage;
   const overflow = useRef(document.body.style.overflow); // to store the previous overflow value
   const iframe = useRef<HTMLIFrameElement>(null);
+  const popup = useRef<HTMLDivElement>(null);
 
   const [copid, setCopied] = useState<boolean>(false);
 
@@ -52,15 +53,27 @@ export default function PopupWindow({
       "*"
     );
   }
+
+  async function handleBlur(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    const closeMode = await storage.getItem<number>(CLOSE_MODE_STORAGE_KEY, {
+      fallback: CloseMode.BOTH,
+    });
+    if (!(closeMode & CloseMode.BLUR)) return;
+    if (popup.current && !popup.current.contains(e.target as Node)) {
+      closePopup();
+    }
+  }
   return (
     <>
       <div
+        onClick={handleBlur}
         className={cn(
           "fixed inset-0 w-screen h-screen bg-gray-900 bg-opacity-60 flex items-center justify-center overflow-hidden z-[2147483647]",
           className
         )}
       >
         <div
+          ref={popup}
           className="relative"
           style={{ width: `${size}%`, height: `${size}%` }}
         >
