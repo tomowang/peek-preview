@@ -21,6 +21,12 @@ Features:
 -   Use shift⇧ + click link or drag link to open links for peek preview
 -   Press Esc or just blur the preview window to close it
 
+Known issues:
+
+-   Some websites may not work properly due to `onfetch` handler of [service workers](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest#interact-w-service-workers)
+-   Some websites disable the drag event or shift⇧ + click event, so you can't use them to open links for peek preview
+-   Links may not work properly when they redirect to another sites which have Content Security Policy (CSP) enabled
+
 This project is created by command `pnpm dlx wxt@latest init`
 with options `react` and `pnpm`.
 

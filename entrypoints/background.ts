@@ -7,7 +7,7 @@ import {
   DEFAULT_PERCENTAGE,
   IFrameMessage,
 } from "@/utils/const";
-import { log } from "@/utils/index";
+import { log, stringHash } from "@/utils/index";
 
 export default defineBackground(() => {
   browser.runtime.onMessage.addListener(
@@ -41,8 +41,10 @@ export default defineBackground(() => {
   browser.runtime.onMessage.addListener(async (message: IFrameMessage) => {
     log("background received message:", message);
     const url = new URL(message.url);
+    const id = stringHash(`${url.host}${url.pathname}`);
 
     const rules = await browser.declarativeNetRequest.getSessionRules();
+    log("current rules:", rules);
     if (message.action === MessageActions.OPEN_IFRAME_POPUP) {
       await browser.declarativeNetRequest.updateSessionRules({
         addRules: [
@@ -63,9 +65,9 @@ export default defineBackground(() => {
               ],
             },
             priority: 1,
-            id: rules.length + 1,
+            id,
             condition: {
-              urlFilter: `*${url.host}${url.pathname}*`,
+              urlFilter: `||${url.host}${url.pathname}`,
               resourceTypes: [
                 browser.declarativeNetRequest.ResourceType.MAIN_FRAME,
                 browser.declarativeNetRequest.ResourceType.SUB_FRAME,
@@ -75,16 +77,13 @@ export default defineBackground(() => {
         ],
       });
     } else if (message.action === MessageActions.CLOSE_IFRAME_POPUP) {
-      let ids = rules
-        .filter((rule) =>
-          rule.condition.urlFilter?.includes(`${url.host}${url.pathname}`)
-        )
-        .map((rule) => rule.id);
+      let ids = rules.filter((rule) => rule.id === id).map((rule) => rule.id);
       if (ids.length > 0) {
         await browser.declarativeNetRequest.updateSessionRules({
           removeRuleIds: ids,
         });
       }
     }
+    log("update rules:", await browser.declarativeNetRequest.getSessionRules());
   });
 });
