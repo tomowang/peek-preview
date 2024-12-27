@@ -18,6 +18,12 @@ Features:
 2. Use shift⇧ + click link or drag link to open links for peek preview
 3. Press Esc or just blur the preview window to close it
 
+Known issues:
+
+1. Some websites may not work properly due to `onfetch` handler of service workers
+2. Some websites disable the drag event or shift⇧ + click event, so you can't use them to open links for peek preview
+3. Links may not work properly when they redirect to another sites which have Content Security Policy (CSP) enabled
+
 Open source on GitHub: <https://github.com/tomowang/peek-preview>
 
 ## Category
@@ -39,6 +45,7 @@ https://youtu.be/s3XLsu8M1LY
 ## Screenshots
 
 ![screenshot 1](./screenshot-1.png)
+![screenshot 2](./screenshot-2.png)
 
 ## Small promo tile
 
