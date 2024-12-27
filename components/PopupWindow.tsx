@@ -22,7 +22,7 @@ export default function PopupWindow({
   const iframe = useRef<HTMLIFrameElement>(null);
   const popup = useRef<HTMLDivElement>(null);
 
-  const [copid, setCopied] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -93,22 +93,23 @@ export default function PopupWindow({
             >
               <ExternalLink className="w-8 h-8 cursor-pointer text-white" />
             </div>
-            {copid ? (
-              <div title={t("iframeActionCopied")}>
-                <Check className="w-8 h-8 cursor-pointer text-white" />
-              </div>
-            ) : (
-              <div
-                title={t("iframeActionCopyLink")}
-                onClick={() => {
-                  navigator.clipboard.writeText(url);
-                  setCopied(true);
-                  setTimeout(() => setCopied(false), 2000);
-                }}
-              >
-                <Clipboard className="w-8 h-8 cursor-pointer text-white" />
-              </div>
-            )}
+            <div
+              title={t("iframeActionCopied")}
+              style={{ display: copied ? "block" : "none" }}
+            >
+              <Check className="w-8 h-8 cursor-pointer text-white" />
+            </div>
+            <div
+              title={t("iframeActionCopyLink")}
+              style={{ display: copied ? "none" : "block" }}
+              onClick={() => {
+                navigator.clipboard.writeText(url);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+              }}
+            >
+              <Clipboard className="w-8 h-8 cursor-pointer text-white" />
+            </div>
           </div>
           <iframe
             ref={iframe}
