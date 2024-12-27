@@ -51,3 +51,10 @@ export enum CloseMode {
 export const PERCENTAGE_STORAGE_KEY = "local:percentage";
 
 export const DEFAULT_PERCENTAGE = 90;
+
+export const STORE_URLS = {
+  chrome:
+    "https://chromewebstore.google.com/detail/peek-preview-arc-like-lin/jlllnhfjmihoiagiaallhmlcgdohdocb",
+  edge: "https://microsoftedge.microsoft.com/addons/detail/peek-preview-arc-like-l/lmgfgcpcpmplbhgfbopiidfkamfckpgp",
+  firefox: "https://addons.mozilla.org/addon/peek-preview-arc-like-preview/",
+} as { [key: string]: string };

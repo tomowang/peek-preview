@@ -2,6 +2,12 @@
   "popupTitle": {
     "message": "Peek Preview"
   },
+  "viewInStore": {
+    "message": "View in store"
+  },
+  "bugReport": {
+    "message": "Report a bug"
+  },
   "windowModeTitle": {
     "message": "Peek Preview"
   },

@@ -7,9 +7,10 @@ import {
   OPEN_MODE_STORAGE_KEY,
   CloseMode,
   WindowMode,
+  STORE_URLS,
 } from "@/utils/const";
 import logo from "/icon/48.png";
-import GitHubLogo from "/github.svg";
+import { Blocks, Bug } from "lucide-react";
 
 function App() {
   const [windowMode, setWindowMode] = useState(WindowMode.IFRAME);
@@ -18,6 +19,8 @@ function App() {
   const [percent, setPercent] = useState(DEFAULT_PERCENTAGE);
 
   const t = browser.i18n.getMessage;
+
+  const storeUrl = STORE_URLS[import.meta.env.BROWSER] ?? STORE_URLS.chrome;
 
   useEffect(() => {
     storage.getItem<number>(WINDOW_MODE_STORAGE_KEY).then((mode) => {
@@ -58,8 +61,15 @@ function App() {
         <img src={logo} alt={t("popupTitle")} className="w-6 h-6" />
         <h1 className="text-base">{t("popupTitle")}</h1>
         <div className="flex-1"></div>
-        <a href="https://github.com/tomowang/peek-preview" target="_blank">
-          <img src={GitHubLogo} alt="GitHub" className="w-6 h-6" />
+        <a href={storeUrl} target="_blank" title={t("viewInStore")}>
+          <Blocks className="w-6 h-6 cursor-pointer" />
+        </a>
+        <a
+          href="https://github.com/tomowang/peek-preview/issues"
+          target="_blank"
+          title={t("bugReport")}
+        >
+          <Bug className="w-6 h-6 cursor-pointer" />
         </a>
       </nav>
       <div className="p-2 flex flex-col space-y-3">

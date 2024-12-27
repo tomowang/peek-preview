@@ -2,6 +2,12 @@
   "popupTitle": {
     "message": "Peek Preview"
   },
+  "viewInStore": {
+    "message": "在应用商店查看"
+  },
+  "bugReport": {
+    "message": "报告问题"
+  },
   "windowModeTitle": {
     "message": "Peek预览"
   },
