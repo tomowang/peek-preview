@@ -1,4 +1,4 @@
-import { ContentScriptContext, ShadowRootContentScriptUi } from "wxt/client";
+import { ContentScriptContext, ShadowRootContentScriptUi } from "#imports";
 import {
   EXT_PARAM_KEY,
   OpenMessage,

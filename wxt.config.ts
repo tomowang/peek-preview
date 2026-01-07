@@ -9,7 +9,6 @@ export default defineConfig({
     permissions: ["storage", "declarativeNetRequest"],
     host_permissions: ["*://*/*"],
   },
-  extensionApi: "chrome",
   modules: ["@wxt-dev/module-react"],
   vite: (configEnv) => ({
     plugins:
@@ -17,4 +16,7 @@ export default defineConfig({
         ? [removeConsole({ includes: ["log"] })]
         : [],
   }),
+  webExt: {
+    chromiumArgs: ["--user-data-dir=./.wxt/chrome-data"],
+  },
 });
