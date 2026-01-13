@@ -11,6 +11,8 @@ import {
   MESSAGE_CHANNEL,
   WINDOW_MODE_STORAGE_KEY,
   WindowMode,
+  TRIGGER_KEY_STORAGE_KEY,
+  TriggerKey,
 } from "@/utils/const";
 import ReactDOM from "react-dom/client";
 import PopupWindow from "@/components/PopupWindow";
@@ -28,6 +30,9 @@ export default defineContentScript({
     });
     const closeMode = await storage.getItem<number>(CLOSE_MODE_STORAGE_KEY, {
       fallback: CloseMode.BOTH,
+    });
+    const triggerKey = await storage.getItem<string>(TRIGGER_KEY_STORAGE_KEY, {
+      fallback: TriggerKey.SHIFT,
     });
 
     let ui: null | ShadowRootContentScriptUi<{
@@ -74,13 +79,31 @@ export default defineContentScript({
         });
       }
     } else {
-      // open links with shift key
-      if (openMode && openMode & OpenMode.SHIFT_CLICK) {
+      // open links with shortcut key
+      if (openMode && openMode & OpenMode.SHORTCUT_CLICK) {
         ctx.addEventListener(
           document,
           "click",
           async (event: MouseEvent) => {
-            if (!event.shiftKey) return;
+            let triggered = false;
+            switch (triggerKey) {
+              case TriggerKey.SHIFT:
+                triggered = event.shiftKey;
+                break;
+              case TriggerKey.ALT:
+                triggered = event.altKey;
+                break;
+              case TriggerKey.CTRL:
+                triggered = event.ctrlKey;
+                break;
+              case TriggerKey.META:
+                triggered = event.metaKey;
+                break;
+              default:
+                triggered = event.shiftKey;
+                break;
+            }
+            if (!triggered) return;
             ui = await openPopup(event, ctx);
           },
           { capture: true }

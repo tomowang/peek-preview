@@ -23,8 +23,23 @@
   "openModeDesc": {
     "message": "Changes take effect after refreshing the tab"
   },
-  "openModeShiftClick": {
-    "message": "Shift⇧ + click a link"
+  "openModeShortcutClick": {
+    "message": "Shortcut + click a link"
+  },
+  "triggerKeyTitle": {
+    "message": "Trigger key"
+  },
+  "triggerKeyShift": {
+    "message": "Shift"
+  },
+  "triggerKeyAlt": {
+    "message": "Alt"
+  },
+  "triggerKeyCtrl": {
+    "message": "Ctrl"
+  },
+  "triggerKeyMeta": {
+    "message": "Command/Win"
   },
   "openModeDragLink": {
     "message": "Drag a link"

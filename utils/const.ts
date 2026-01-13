@@ -32,12 +32,21 @@ export enum WindowMode {
   POPUP = 0b10,
 }
 
+export const TRIGGER_KEY_STORAGE_KEY = "local:triggerKey";
+
+export enum TriggerKey {
+  SHIFT = "shift",
+  ALT = "alt",
+  CTRL = "ctrl",
+  META = "meta",
+}
+
 export const OPEN_MODE_STORAGE_KEY = "local:openMode";
 
 export enum OpenMode {
-  SHIFT_CLICK = 0b1,
+  SHORTCUT_CLICK = 0b1,
   DRAG_LINK = 0b10,
-  BOTH = SHIFT_CLICK | DRAG_LINK,
+  BOTH = SHORTCUT_CLICK | DRAG_LINK,
 }
 
 export const CLOSE_MODE_STORAGE_KEY = "local:closeMode";
