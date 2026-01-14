@@ -18,7 +18,8 @@ webpage before you open it in a new tab.
 Features:
 
 -   Preview links in current tab or popup window
--   Use shift⇧ + click link or drag link to open links for peek preview
+-   Use shift⇧ + click link to open links for peek preview (support customizable hotkey)
+-   Drag link to open links for peek preview
 -   Press Esc or just blur the preview window to close it
 
 Known issues:

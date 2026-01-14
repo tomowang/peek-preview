@@ -15,8 +15,9 @@ Create by tomowang with ❤️ <https://tomo.dev>
 Features:
 
 1. Preview links in current tab or popup window
-2. Use shift⇧ + click link or drag link to open links for peek preview
-3. Press Esc or just blur the preview window to close it
+2. Use shift⇧ + click link to open links for peek preview (support customizable hotkey)
+3. Drag link to open links for peek preview
+4. Press Esc or just blur the preview window to close it
 
 Known issues:
 
